@@ -1,0 +1,37 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/l_login}">
+
+<div layout:fragment="login">
+    <div class="container" id="container">
+        <div class="form-container sign-in-container">
+<!--            form đăng nhập-->
+            <form  method="POST" th:action="@{/trang-chu/dang-nhap}" th:object="${account}" enctype="multipart/form-data">
+                <h1>Đăng nhập</h1>
+<!--                <div class="social-container">-->
+<!--                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>-->
+<!--                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>-->
+<!--                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>-->
+<!--                </div>-->
+                <span>Đăng nhập tại đây !</span>
+                <span th:text="${msg_error}" style="color:red"></span>
+                <span th:text="${msg_success}" style="color:green"></span>
+                <input type="email" placeholder="Tên đăng nhập"  th:field="*{email}"/>
+                <input type="password" placeholder="Password" th:field="*{passWord}"  />
+                <a href="#">Quên mật khẩu ?</a>
+                <button type="submit">Đăng nhập</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right">
+                    <h1>Chào bạn !</h1>
+                    <p>Để sử dụng hết tính năng của chúng tôi, hay đăng kí 1 tài khoản nhé !</p>
+                    <a style="color:white"  class="ghost" th:href="@{/trang-chu/dang-ky}" id="signUp">Đăng ký</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
+

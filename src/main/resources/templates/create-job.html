@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/l_main}">
+<div layout:fragment="layout_main">
+  <section class="section-padding">
+    <div class="row">
+      <div class="col-lg-10 col-12 mx-auto">
+<!--        form để thêm job-->
+        <form method="POST" th:action="@{/quan-ly-cong-viec/tao-cong-viec}" th:object="${job}">
+          <!-- 2 column grid layout with text inputs for the first and last names -->
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="form6Example1" th:field="*{nameJob}" class="form-control" />
+                <label class="form-label"  for="form6Example1">Tên công việc</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <textarea class="form-control" id="form6Example7" th:field="*{context}" rows="4"></textarea>
+                <label class="form-label" for="form6Example7">Ghi chú</label>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block mb-4">Tạo công việc</button>
+        </form>
+<!--kết thúc-->
+      </div>
+</div>
+
+</section>
+
+</html>

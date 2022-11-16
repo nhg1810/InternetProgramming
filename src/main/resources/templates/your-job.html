@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/l_main}">
+<div layout:fragment="layout_main">
+  <section class="section-padding">
+    <a th:href="@{/quan-ly-cong-viec/tao-cong-viec}" class="btn btn-secondary btn-rounded">Tạo một công việc</a>
+
+    <a th:href="@{/quan-ly-cong-viec/tao-cong-viec}" class="btn btn-secondary btn-rounded">Quản lý một phòng họp</a>
+
+    <div class="row">
+
+      <!--      //các card công việc được tạo-->
+        <th:block th:each="job : ${job}">
+          <div class="col-lg-6 col-12">
+            <div class="card mb-3" style="max-width: 540px;">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img
+                          src="https://mdbcdn.b-cdn.net/wp-content/uploads/2020/06/vertical.webp"
+                          alt="Trendy Pants and Shoes"
+                          class="img-fluid rounded-start"
+                  />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title" th:text="${job.nameJob}">Card title</h5>
+                    <p class="card-text" th:text="${job.context}">
+                      This is a wider card with supporting text below as a natural lead-in to
+                      additional content. This content is a little bit longer.
+                    </p>
+                    <p class="card-text">
+                      <small class="text-muted">Last updated 3 mins ago</small>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </th:block>
+
+      </div>
+    </div>
+
+</section>
+
+</html>

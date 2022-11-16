@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/l_main}">
+<style>
+.section-profile{
+background-color:red;
+}
+    .form-control:focus {
+    box-shadow: none;
+    border-color: #BA68C8
+}
+
+.profile-button {
+    background: rgb(99, 39, 120);
+    box-shadow: none;
+    border: none
+}
+
+.profile-button:hover {
+    background: #682773
+}
+
+.profile-button:focus {
+    background: #682773;
+    box-shadow: none
+}
+
+.profile-button:active {
+    background: #682773;
+    box-shadow: none
+}
+
+.back:hover {
+    color: #682773;
+    cursor: pointer
+}
+
+.labels {
+    font-size: 11px
+}
+
+.add-experience:hover {
+    background: #BA68C8;
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px #BA68C8
+}
+</style>
+<div layout:fragment="layout_main">
+    <main>
+        <section class="section-padding">
+            <form  method="POST" th:action="@{/thong-tin-ca-nhan/chinh-sua}" th:object="${account}" enctype="multipart/form-data">
+            <div class="container rounded bg-white mt-5 mb-5 section-profile">
+                <div class="row">
+                    <div class="col-md-3 border-right">
+                        <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img
+                                class="rounded-circle mt-5" width="150px"  id="img-avata"
+                                src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span
+                                class="font-weight-bold" th:text="*{name}">Edogaru</span><span
+                                class="text-black-50" th:text="*{email}" ></span><span> </span>
+
+                            <input type="file" name="image-avata" th:field="*{moreInfAccount.avata}" accept="image/png, image/jpeg"
+                                   onchange="document.getElementById('img-avata').src = window.URL.createObjectURL(this.files[0])"/>
+
+                        </div>
+                    </div>
+                    <div class="col-md-5 border-right">
+                        <div class="p-3 py-5">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h4 class="text-right">Quản lý profile</h4>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-6"><label class="labels">Họ và tên</label>
+                                    <input type="text" class="form-control"
+                                           placeholder="Nguyễn Văn A" value="" th:field="*{name}"></div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12"><label class="labels">Số điện thoại
+                                </label>
+                                    <input type="text" class="form-control" placeholder="0987654312" value="" th:field="*{moreInfAccount.phone}"></div>
+                                <div class="col-md-12"><label class="labels">Địa chỉ</label>
+                                    <input type="text" class="form-control" placeholder="Đà nẵng..." value="" th:field="*{moreInfAccount.address}"></div>
+                                <div class="col-md-12"><label class="labels">Trạng thái tốt nghiệp</label>
+                                    <input type="text" class="form-control" placeholder="Đã tốt nghiệp hoặc làm việc tại" value="" th:field="*{moreInfAccount.descriptGraduation}">
+                                </div>
+                                <div class="col-md-12"><label class="labels">Link profile</label>
+                                    <input type="text" class="form-control" placeholder="link github, facebook,..." value="" th:field="*{moreInfAccount.link}"></div>
+                                <div class="col-md-12"><label class="labels">Thông tin ngoài ra</label>
+                                    <input type="text" class="form-control" placeholder="Giới thiệu bản thân" value="" th:field="*{moreInfAccount.context}"></div>
+                            </div>
+                            <div class="mt-5 text-center">
+                                <button class="btn btn-primary profile-button" type="submit">Lưu thông tin</button></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 py-5">
+                            <div class="d-flex justify-content-between align-items-center experience"><span>Kinh nghiệm trong công việc
+								</span><span class="border px-3 p-1 add-experience"><i
+                                    class="fa fa-plus"></i></div><br>
+                            <div class="col-md-12"><label class="labels">Đã làm được ...</label>
+                                <input type="text" class="form-control" placeholder="kinh nghiệm..." value="" th:field="*{moreInfAccount.experience}"></div> <br>
+                            <div class="col-md-12"><label class="labels">Ngày sinh</label>
+                                <input type="date" class="form-control" placeholder="11/11/2002" th:field="*{moreInfAccount.birth}" value=""></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+            </form>
+        </section>
+    </main>
+</div>
+</html>

@@ -1,0 +1,38 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/l_login}">
+
+<div layout:fragment="login">
+    <div class="container right-panel-active" id="container">
+        <div class="form-container sign-up-container">
+            <!--            form đăng ký-->
+            <form method="POST" th:action="@{/trang-chu/dang-ky}" th:object="${account_sg}">
+                <h1>Đăng kí tài khoản</h1>
+                <!--                <div class="social-container">-->
+                <!--                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>-->
+                <!--                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>-->
+                <!--                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>-->
+                <!--                </div>-->
+                <span style="color:red" th:text="${msg_error}"></span>
+                <input type="text" placeholder="Họ tên" th:field="*{name}" />
+                <span class="errors-valid" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                <input type="email" placeholder="Email"  th:field="*{email}" />
+                <span class="errors-valid" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                <input type="password" placeholder="Mật khẩu"  th:field="*{passWord}" />
+                <span class="errors-valid" th:if="${#fields.hasErrors('passWord')}" th:errors="*{passWord}"></span>
+                <button type="submit">Đăng ký</button>
+            </form>
+
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Chào mừng bạn trở lại</h1>
+                    <p>Tạo tài khoản ban đầu với chỉ 1 vài thông tin cơ bản !! </p>
+                    <a style="color:white" class="ghost" th:href="@{/trang-chu/dang-nhap}" id="signIn">Đăng nhập</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
