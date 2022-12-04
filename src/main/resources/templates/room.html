@@ -8,134 +8,126 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
-  <section class="section-padding">
-  <head>
-  <meta charset="utf-8">
-  <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
-  <!--  All snippets are MIT license http://bootdey.com/license -->
-  <title>chat app - Bootdey.com</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-<body>
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-<div class="container">
-  <div class="row clearfix">
-    <div class="col-lg-12">
-      <div class="card chat-app">
-        <div id="plist" class="people-list">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="fa fa-search"></i></span>
-            </div>
-            <input type="text" class="form-control" placeholder="Search...">
-          </div>
-          <ul class="list-unstyled chat-list mt-2 mb-0">
-<!--            tất cả các danh sách room chat-->
-            <th:block th:each="job : ${job}">
-              <li class="clearfix" th:onclick="selectUser([[ ${job.room.idRoom}]],[[${job.nameJob}]])">
-                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar">
-                <div class="about">
-                  <div class="name" th:text="${job.nameJob}">Vincent Porter</div>
-<!--                  <div class="status" th:text="${job.context}"> <i class="fa fa-circle offline"></i> left 7 mins ago </div>-->
+  <section>
+    <head>
+      <meta charset="utf-8">
+      <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
+      <!--  All snippets are MIT license http://bootdey.com/license -->
+      <title>chat app - Bootdey.com</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+    </head>
+    <body>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <div class="container">
+      <div class="row clearfix">
+        <div class="col-lg-12">
+          <div class="card chat-app">
+            <div id="plist" class="people-list">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fa fa-search"></i></span>
                 </div>
-              </li>
-            </th:block>
-<!--            <li class="clearfix active">-->
-<!--              <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">-->
-<!--              <div class="about">-->
-<!--                <div class="name">Aiden Chavez</div>-->
-<!--                <div class="status"> <i class="fa fa-circle online"></i> online </div>-->
-<!--              </div>-->
-<!--            </li>-->
+                <input type="text" class="form-control" placeholder="Search...">
+              </div>
+              <ul class="list-unstyled chat-list mt-2 mb-0">
+                <!--            tất cả các danh sách room chat-->
+                <th:block th:each="job : ${job}">
+                  <li class="clearfix">
+                    <img th:src="@{|/uploads/job/${job.context}|}" alt="avatar">
+                    <div class="about">
+                      <div class="name" >
+                        <a  style="color:#1c4f85" th:href="@{|/quan-ly-phong-hop/${job.room.idRoom}|}" th:text="${job.nameJob}"></a>
+                        <b style="font-size: 13px">Chủ phòng: <a href="" style="color: #1c4f85; font-size: 13px" th:text="${job.account.name}"></a> </b>
 
-          </ul>
-        </div>
-        <div class="chat" id="layout-chat">
-          <div class="chat-header clearfix">
-            <div class="row">
-              <div class="col-lg-6">
-                <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
-                </a>
-                <div class="chat-about">
-                  <h6 class="m-b-0 " id ="name-chat">Aiden Chavez</h6>
-                  <small>Last seen: 2 hours ago</small>
-                </div>
-              </div>
-              <div class="col-lg-6 hidden-sm text-right">
-                <a href="javascript:void(0);" class="btn btn-outline-secondary"><i class="fa fa-camera"></i></a>
-                <a href="javascript:void(0);" class="btn btn-outline-primary"><i class="fa fa-image"></i></a>
-                <a href="javascript:void(0);" class="btn btn-outline-info"><i class="fa fa-cogs"></i></a>
-                <a href="javascript:void(0);" class="btn btn-outline-warning"><i class="fa fa-question"></i></a>
-              </div>
+                      </div>
+                      <!--                  <div class="status" th:text="${job.context}"> <i class="fa fa-circle offline"></i> left 7 mins ago </div>-->
+                    </div>
+                  </li>
+                </th:block>
+                <!--            <li class="clearfix active">-->
+                <!--              <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">-->
+                <!--              <div class="about">-->
+                <!--                <div class="name">Aiden Chavez</div>-->
+                <!--                <div class="status"> <i class="fa fa-circle online"></i> online </div>-->
+                <!--              </div>-->
+                <!--            </li>-->
+              </ul>
             </div>
-          </div>
-          <div class="chat-history" >
-            <ul class="m-b-0" id="chat-history" >
-<!--              <li class="clearfix">-->
-<!--                <div class="message-data text-right">-->
-<!--                  <span class="message-data-time">10:10 AM, Today</span>-->
-<!--                  <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">-->
-<!--                </div>-->
-<!--                <div class="message other-message float-right"> Hi Aiden, how are you? How is the project coming along? </div>-->
-<!--              </li>-->
-<!--              <li class="clearfix">-->
-<!--                <div class="message-data">-->
-<!--                  <span class="message-data-time">10:12 AM, Today</span>-->
-<!--                </div>-->
-<!--                <div class="message my-message">Are we meeting today?</div>-->
-<!--              </li>-->
-<!--              <li class="clearfix">-->
-<!--                <div class="message-data">-->
-<!--                  <span class="message-data-time">10:15 AM, Today</span>-->
-<!--                </div>-->
-<!--                <div class="message my-message">Project has been already finished and I have results to show you.</div>-->
-<!--              </li>-->
-            </ul>
-          </div>
-          <div class="chat-message clearfix">
-            <div class="input-group mb-0">
-              <div class="input-group-prepend">
-                <span onclick="sendMsg()" class="input-group-text"><i class="fa fa-send"></i></span>
-              </div>
-              <input type="text" id="value-message" class="form-control" placeholder="Enter text here...">
-            </div>
-          </div>
-        </div>
-        <section class="page_404" id="page-null">
-          <div class="container">
-            <div class="row">
-              <div class="col-sm-12 ">
-                <div class="col-sm-10 col-sm-offset-1  text-center">
-                  <div class="four_zero_four_bg">
-                    <h1 class="text-center ">Hi ! </h1>
-
-
+            <div class="chat" id="layout-chat">
+              <div class="chat-header clearfix">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
+                      <img th:src="@{|/uploads/job/${imgjob}|}" alt="avatar">
+                    </a>
+                    <div class="chat-about">
+                      <h6 class="m-b-0 " id ="name-chat" th:text="${jobname}" >Aiden Chavez</h6>
+                      <small>Last seen: 2 hours ago</small>
+                    </div>
                   </div>
-
-                  <div class="contant_box_404">
-                    <h3 class="h2">
-                      Chọn phòng để thực hiện chat !
-                    </h3>
-
-                    <p>Quản lý tin nhắn, tài liệu dễ dàng</p>
-
+                  <div class="col-lg-6 hidden-sm text-right">
+                    <a th:href="@{| /quan-ly-phong-hop/rtc/${idroom} |}" class="btn btn-outline-secondary"><i class="fa fa-camera"></i></a>
+                    <a href="javascript:void(0);" class="btn btn-outline-primary"><i class="fa fa-image"></i></a>
+                    <a href="javascript:void(0);" class="btn btn-outline-info"><i class="fa fa-cogs"></i></a>
+                    <a href="javascript:void(0);" class="btn btn-outline-warning"><i class="fa fa-question"></i></a>
                   </div>
                 </div>
               </div>
+              <div class="chat-history" >
+                <ul class="m-b-0" id="chat-history" >
+                  <th:block th:each="message : ${message}"
+                           >
+                                <li class="clearfix"  th:if="${message.account.idAccount} eq ${idUser}" >
+                                  <div class="message-data text-right">
+                                    <a style="font-size: 10px" href="" th:text="${message.account.name}"></a>
+                                    <span style="font-size: 10px"  th:text="${message.timeSending}" class="message-data-time">10:10 AM, Today</span>
+                                    <img th:src="@{|/uploads/avata/${message.account.moreInfAccount.avata}|}" alt="avatar">
+                                  </div>
+                                  <div th:text="${message.context}"  style="background: #2e7f91; color: white" class="message other-message float-right" ></div>
+                                </li >
+
+                                <li class="clearfix"  th:unless="${message.account.idAccount} eq ${idUser}" >
+                                  <div class="message-data text-left">
+                                    <img th:src="@{|/uploads/avata/${message.account.moreInfAccount.avata}|}" alt="avatar">
+                                    <a style="font-size: 10px" href="" th:text="${message.account.name}"></a>
+                                    <span style="font-size: 10px" th:text="${message.timeSending}" class="message-data-time">10:10 AM, Today</span>
+                                  </div>
+                                  <div th:text="${message.context}" class="message other-message float-left" ></div>
+                                </li >
+                  <!--              <li class="clearfix">-->
+                  <!--                <div class="message-data">-->
+                  <!--                  <span class="message-data-time">10:12 AM, Today</span>-->
+                  <!--                </div>-->
+                  <!--                <div class="message my-message">Are we meeting today?</div>-->
+                  <!--              </li>-->
+                  <!--              <li class="clearfix">-->
+                  <!--                <div class="message-data">-->
+                  <!--                  <span class="message-data-time">10:15 AM, Today</span>-->
+                  <!--                </div>-->
+                  <!--                <div class="message my-message">Project has been already finished and I have results to show you.</div>-->
+                  <!--              </li>-->
+                  </th:block>
+
+                </ul>
+              </div>
+              <div class="chat-message clearfix">
+                <div class="input-group mb-0">
+                  <div class="input-group-prepend">
+                    <button type="submit" onclick="sendMsg()" class="input-group-text"><i class="fa fa-send"></i></button>
+                  </div>
+                  <input type="text"    id="value-message" class="form-control" placeholder="Enter text here...">
+                </div>
+              </div>
             </div>
           </div>
-        </section>
-
+        </div>
       </div>
     </div>
-  </div>
-</div>
-<script th:src="@{/vendors/js/socket.js}"></script>
-<style type="text/css">
+    <script th:src="@{/vendors/js/socket.js}"></script>
+    <style type="text/css">
 
 
 .page_404{ padding:40px 0; background:#fff; font-family: 'Arvo', serif;
@@ -220,6 +212,11 @@ body{
 
 .people-list .chat-list li .name {
     font-size: 15px
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    width: 130px;
+    overflow-x: hidden;
 }
 
 .people-list .chat-list img {
@@ -260,6 +257,8 @@ body{
 
 .chat .chat-history {
     padding: 20px;
+    overflow-y: scroll;
+    max-height: 300px;
     border-bottom: 2px solid #fff
 }
 
@@ -425,9 +424,9 @@ body{
     }
 }
 </style>
-<script type="text/javascript">
-</script>
-</body>
+    <script type="text/javascript">
+    </script>
+    </body>
   </section>
 </div>
 </html>

@@ -24,7 +24,6 @@ public class Account {
     private String name;
     @NotEmpty(message = "{NotEmpty.password}")
     private String passWord;
-
     @NotEmpty(message = "{NotEmpty.email}")
     @Email(message = "{Invalid.email}")
     private String email;
@@ -38,12 +37,6 @@ public class Account {
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Message> messages;
 
-    @OneToMany(mappedBy = "account1", cascade = CascadeType.ALL)
-    private List<Member> member1;
-    @OneToMany(mappedBy = "account2", cascade = CascadeType.ALL)
-    private List<Member> member2;
-    @OneToMany(mappedBy = "account3", cascade = CascadeType.ALL)
-    private List<Member> member3;
-    @OneToMany(mappedBy = "account4", cascade = CascadeType.ALL)
-    private List<Member> member4;
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    private List<Member> member;
 }

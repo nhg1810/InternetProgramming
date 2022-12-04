@@ -18,23 +18,14 @@ public class Member {
     private String idMb;
 
     @ManyToOne
-    @JoinColumn(name = "idMember1")
-    private Account account1;
+    @JoinColumn(name = "idMember")
+    private Account account;
 
-    @ManyToOne
-    @JoinColumn(name = "idMember2")
-    private Account account2;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "idJob")
+    private Job job;
 
-    @ManyToOne
-    @JoinColumn(name = "idMember3")
-    private Account account3;
-
-    @ManyToOne
-    @JoinColumn(name = "idMember4")
-    private Account account4;
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Job> jobs;
+    private int status;
 
     @PrePersist
     private void prePersist() {

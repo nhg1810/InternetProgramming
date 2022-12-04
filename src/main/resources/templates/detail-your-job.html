@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/l_main}">
+<div layout:fragment="layout_main">
+    <section class="section-padding">
+        <style>
+            body{
+    background:#eee;
+}
+.card {
+    box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: 1rem;
+}
+.text-reset {
+    --bs-text-opacity: 1;
+    color: inherit!important;
+}
+a {
+    color: #5465ff;
+    text-decoration: none;
+}
+        </style>
+        <div class="container-fluid">
+
+            <div class="container">
+                <!-- Title -->
+                <div class="d-flex justify-content-between align-items-center py-3">
+                    <h2 class="h5 mb-0" th:text="${jobDetail.nameJob}"><a href="#" class="text-muted"></a> Order #16123222</h2>
+                </div>
+
+                <!-- Main content -->
+                <div class="row">
+                    <div class="col-lg-8">
+                        <!-- Details -->
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="mb-3 d-flex justify-content-between">
+                                    <div>
+                                        <span class="me-3">Ngày tạo</span>
+                                        <span class="me-3"  th:text="${jobDetail.detailJob.date}">#16123222</span>
+                                        <span class="me-3">Người tạo</span>
+                                        <span class="badge rounded-pill bg-info" th:text="${jobDetail.account.name}">SHIPPING</span>
+                                    </div>
+                                    <div class="d-flex">
+                                        <button class="btn btn-link p-0 me-3 d-none d-lg-block btn-icon-text"><i class="bi bi-download"></i> <span class="text">Tất cả các thành viên(đề xuất duyệt)</span></button>
+                                        <div class="dropdown">
+                                            <button class="btn btn-link p-0 text-muted" type="button" data-bs-toggle="dropdown">
+                                                <i class="bi bi-three-dots-vertical"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                <li><a class="dropdown-item" href="#"><i class="bi bi-pencil"></i> Edit</a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="bi bi-printer"></i> Print</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="table table-borderless">
+                                    <tbody>
+                                    <th:block th:each="member : ${member}">
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex mb-2">
+                                                    <div class="flex-shrink-0">
+                                                        <img th:src="@{|/uploads/avata/${member.account.moreInfAccount.avata} |}" alt="" width="35" class="img-fluid">
+                                                    </div>
+                                                    <div class="flex-lg-grow-1 ms-3">
+                                                        <h6 class="small mb-0"><a th:text="${member.account.name}" href="#" class="text-reset" ></a></h6>
+                                                        <span class="small" th:if="${member.status} eq 1" th:text="@{Trạng thái chưa duyệt}" >Color: Black</span>
+                                                        <span class="small" th:unless="${member.status} eq 1" th:text="@{Trạng thái đã duyệt}" >Color: Black</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-end">
+                                                <a th:href="@{|/moi-nguoi/duyet-thanh-vien/${member.idMb}/${member.job.idJob}|}" th:if="${member.status} eq 1" th:text="@{Duyệt cho vào}" >Color: Black</a>
+                                                <a th:href="@{|/moi-nguoi/chan-thanh-vien/${member.idMb}/${member.job.idJob}|}" th:unless="${member.status} eq 1" th:text="@{Xoá khỏi nhóm}" >Color: Black</a>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                    </tbody>
+                                    <tfoot>
+<!--                                    <tr>-->
+<!--                                        <td colspan="2">Subtotal</td>-->
+<!--                                        <td class="text-end">$159,98</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td colspan="2">Shipping</td>-->
+<!--                                        <td class="text-end">$20.00</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td colspan="2">Discount (Code: NEWYEAR)</td>-->
+<!--                                        <td class="text-danger text-end">-$10.00</td>-->
+<!--                                    </tr>-->
+                                    <tr class="fw-bold">
+                                        <td colspan="2">Tổng thành viên</td>
+                                        <td class="text-end" th:text="${#lists.size(member)}"></td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- Payment -->
+<!--                        <div class="card mb-4">-->
+<!--                            <div class="card-body">-->
+<!--                                <div class="row">-->
+<!--                                    <div class="col-lg-6">-->
+<!--                                        <h3 class="h6">Payment Method</h3>-->
+<!--                                        <p>Visa -1234 <br>-->
+<!--                                            Total: $169,98 <span class="badge bg-success rounded-pill">PAID</span></p>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-lg-6">-->
+<!--                                        <h3 class="h6">Billing address</h3>-->
+<!--                                        <address>-->
+<!--                                            <strong>John Doe</strong><br>-->
+<!--                                            1355 Market St, Suite 900<br>-->
+<!--                                            San Francisco, CA 94103<br>-->
+<!--                                            <abbr title="Phone">P:</abbr> (123) 456-7890-->
+<!--                                        </address>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                    </div>
+                    <div class="col-lg-4">
+                        <!-- Customer Notes -->
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h3 class="h6">Mô tả công việc của tôi</h3>
+                                <p th:text="${jobDetail.detailJob.descripts}"></p>
+                            </div>
+                        </div>
+                        <div class="card mb-4">
+                            <!-- Shipping information -->
+                            <div class="card-body">
+                                <h3 class="h6">Kĩ năng thực hiện</h3>
+                                <p th:text="${jobDetail.detailJob.skillApply}"></p>
+                                <h3 class="h6">Ngôn ngữ</h3>
+                                <p th:text="${jobDetail.detailJob.language}"></p>
+                                <strong th:text="${ 'Trình độ: ' + jobDetail.detailJob.level}">Trình độ: </strong>
+                                <span><a href="#" class="text-decoration-underline" target="_blank">FF1234567890</a> <i class="bi bi-box-arrow-up-right"></i> </span>
+                                <hr>
+                                <h3 class="h6">Hình ảnh giới thiệu</h3>
+                                <img class="img-thumbnail"
+                                     th:src="@{|/uploads/job/${jobDetail.context}|}" alt="">
+<!--                                -->
+<!--                                <address>-->
+<!--                                    <strong>John Doe</strong><br>-->
+<!--                                    1355 Market St, Suite 900<br>-->
+<!--                                    San Francisco, CA 94103<br>-->
+<!--                                    <abbr title="Phone">P:</abbr> (123) 456-7890-->
+<!--                                </address>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+</html>

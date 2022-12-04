@@ -1,0 +1,2015 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/l_main}">
+
+<div layout:fragment="layout_main">
+   <style>
+       @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;0,700;1,600;1,700&display=swap');
+
+* {
+    margin: auto;
+    padding: 0 auto;
+    transition: 0.4s;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: rgb(254, 254, 254);
+}
+
+p,
+a {
+    font-size: 14px;
+}
+
+section {
+    margin-top: 5px;
+    width: 95%;
+    height: auto;
+}
+
+/* style for header */
+
+
+#header {
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#header>.l-header {
+    margin: 0;
+    width: 600px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+/* sub navigation(need click to show) */
+.cl-sub-nav,.cl-hide-s-nav{
+    cursor: pointer;
+    font-size: 25px;
+}
+.cl-hide-sub-nav{
+    display: none;
+}
+
+.sub-nav {
+    left: 0;
+    position: absolute;
+    width: 200%;
+    height:auto;
+    background-color: rgb(255, 255, 255);
+    top: 100px;
+    z-index: 4;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border: solid 2px rgb(211, 234, 244);
+}
+.sub-nav > a{
+    padding: 20px;
+    font-size: 15px;
+    color: rgb(39, 114, 199);
+}
+.sub-nav > a:hover{
+    background-color: rgb(147, 190, 255);
+    color: white;
+}
+
+#header>.l-header>i {
+    color: rgb(29, 91, 163);
+}
+
+#header>.l-header>.search-tablet {
+    display: none;
+}
+
+#header>.l-header>#logo {
+    height: 80px;
+    width: auto;
+}
+
+#header>.l-header>.search {
+    border: solid 1px rgb(114, 144, 152);
+    width: 60%;
+    height: auto;
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+#header>.l-header>.search>#search {
+    width: 90%;
+    border: 0;
+}
+
+#header>.l-header>.search>i,
+#search {
+    color: rgb(71, 71, 64);
+}
+
+#header>.r-header {
+    margin: 0;
+    width: 500px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#header>.r-header>.user {
+    width: 70px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#header>.r-header>.user>#avata {
+    object-fit: cover;
+    width: 50px;
+    height: auto;
+    background-color: rgb(212, 241, 232);
+    border-radius: 50%;
+}
+
+#header>.r-header>.user>i {
+    color: rgb(56, 54, 54);
+}
+
+#header>.r-header>a {
+    text-decoration: none;
+    color: rgb(56, 56, 56);
+}
+
+#header>.r-header>.coin {
+    width: 60px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    border: solid 2px rgb(110 156 235);
+    border-radius: 10px;
+}
+
+#header>.r-header>.coin>p {
+    font-size: 15px;
+    padding: 8px;
+    color: rgb(110 156 235);
+}
+
+#header>.r-header>i {
+    color: rgb(90, 100, 100);
+}
+
+#header>.r-header>.fa-heart {
+    color: rgb(232, 135, 135);
+}
+
+/* end design header */
+
+/* style for banner */
+#banner {
+    height: auto;
+    display: flex;
+}
+
+#banner>.big-banner {
+    width: 65%;
+    height: 400px;
+    position: relative;
+}
+
+#banner>.big-banner>#img-banner {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    object-fit: cover;
+    z-index: 1;
+    border-radius: 10px;
+
+}
+
+#banner>.big-banner>h1 {
+    position: absolute;
+    z-index: 2;
+    top: 10%;
+    left: 50px;
+    width: 70%;
+    font-size: 40px;
+    font-weight:600;
+    padding: 19px;
+    background-color: rgb(21, 127, 148, 0.7);
+    color: white;
+    border-radius: 20px;
+}
+
+#banner>.big-banner>p {
+    position: absolute;
+    top: 40%;
+    z-index: 2;
+    left: 50px;
+    width: 40%;
+    background-color: rgb(253, 253, 253, 0.7);
+    padding: 10px;
+    border-left: solid 5px rgb(37, 37, 100);
+}
+
+#banner>.big-banner>button {
+    position: absolute;
+    top: 80%;
+    z-index: 2;
+    left: 50px;
+    border: 0;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(133, 169, 223);
+    color: white;
+
+}
+
+#banner>.sm-banner {
+    width: 30%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+#banner>.sm-banner>img {
+    margin: 0;
+    padding: 10px;
+    background-color: rgb(197, 225, 241);
+    border-radius: 10px;
+    width: 60px;
+    height: auto;
+}
+
+#banner>.sm-banner>h2 {
+    margin: 0;
+    margin-top: 20px;
+    color: rgb(60, 74, 74);
+}
+
+#banner>.sm-banner>p {
+    margin: 0;
+    color: rgb(47, 50, 50);
+    border-left: solid 2px rgb(17, 72, 114);
+    padding: 5px;
+}
+
+#banner>.sm-banner>button {
+    margin: 0;
+    margin-top: 20px;
+    border: 0;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: rgb(66, 151, 255);
+    color: white;
+}
+
+/* end for banner */
+/* style for slider */
+#slider {
+    height: 400px;
+}
+
+#slider>h3 {
+    margin-left: 11px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: rgb(51, 79, 79);
+}
+
+.contain-slider {
+    width: 100%;
+    height: auto;
+    display: flex;
+
+}
+
+.contain-slider>.slider {
+
+    width: 250px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid 1px rgb(193, 244, 255);
+    border-radius: 20px;
+}
+
+.contain-slider>.slider>.content-img {
+    width: 100%;
+    height: 60%;
+    position: relative;
+}
+
+.contain-slider>.slider>.content-img>.img-content {
+    width: 90%;
+    height: 90%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    object-fit: cover;
+    padding-bottom: 10px;
+    border-radius: 20px;
+    z-index: 1;
+}
+.contain-slider>.slider>.content-img>.img-content:hover{
+    width: 95%;
+    height: 95%;
+}
+.contain-slider>.slider:hover .content-img>i{
+    background-color: aliceblue;
+    color: red;
+}
+.contain > .slider:hover .content-img > i{
+    background-color: aliceblue;
+    color: red;
+}
+
+.contain-slider>.slider>.content-img>i {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    z-index: 2;
+    top: 10px;
+    right: 20px;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    padding: 5px;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 50%;
+    background-color: rgba(36, 36, 36, 0.7);
+}
+
+.contain-slider>.slider>.content-inf {
+    width: 95%;
+    height: 40%;
+    display: flex;
+    position: relative;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+
+.contain-slider>.slider>.content-inf>img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0;
+}
+
+.contain-slider>.slider>.content-inf>.inf {
+    width: 70%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    align-items: flex-start;
+}
+
+.contain-slider>.slider>.content-inf>.inf>p {
+    margin: 0;
+    font-size: 12px;
+    color: rgb(123, 122, 120);
+}
+
+.contain-slider>.slider>.content-inf>.inf>b {
+    margin: 0;
+    color: rgb(48, 48, 48);
+}
+
+.contain-slider>.slider>.content-inf>.inf>span {
+    font-size: 14px;
+    color: rgb(35, 40, 40);
+}
+
+.content-inf>.inf>h5 {
+    position: absolute;
+    right: 10px;
+    color: rgb(71, 161, 196);
+    font-size: 14px
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    width: 30px;
+    height: 30px;
+    background-color: aliceblue;
+    border-radius: 50%;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    display: none;
+}
+
+/* end style for slider */
+
+/* style main  */
+#main-contain {
+    height: auto;
+    margin-top: 30px;
+}
+
+#main-contain>.contain {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    height: auto;
+    width: 100%;
+    background-color: rgb(247, 255, 255);
+    border-radius: 20px;
+}
+
+#main-contain>h3 {
+    color: rgb(69, 69, 69);
+    margin-left: 11px;
+    margin-bottom: 30px;
+}
+
+.contain>.slider {
+    margin-bottom: 20px;
+    width: 250px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid 1px rgb(193, 244, 255);
+    border-radius: 20px;
+}
+
+.contain>.slider>.content-img {
+    width: 100%;
+    height: 70%;
+    position: relative;
+}
+
+.contain>.slider>.content-img>.img-content {
+    width: 90%;
+    height: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    padding-bottom: 10px;
+    border-radius: 20px;
+    z-index: 1;
+}
+
+.contain>.slider>.content-img>i {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    z-index: 2;
+    top: 20px;
+    right: 20px;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    padding: 5px;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 50%;
+    background-color: rgba(36, 36, 36, 0.5);
+}
+
+.contain>.slider>.content-inf {
+    width: 95%;
+    height: 30%;
+    display: flex;
+    position: relative;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+
+.contain>.slider>.content-inf>img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0;
+}
+
+.contain>.slider>.content-inf>.inf {
+    width: 70%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    align-items: flex-start;
+}
+
+.contain>.slider>.content-inf>.inf>p {
+    margin: 0;
+    font-size: 12px;
+    color: rgb(123, 122, 120);
+}
+
+.contain>.slider>.content-inf>.inf>b {
+    margin: 0;
+    color: rgb(48, 48, 48);
+}
+
+.contain>.slider>.content-inf>.inf>span {
+    font-size: 14px;
+    color: rgb(35, 40, 40);
+}
+
+.contain>.slider>.content-inf>.inf>h5 {
+    position: absolute;
+    right: 10px;
+    color: rgb(71, 161, 196);
+}
+
+/* end style main */
+/* style category */
+.category {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.category>.item-category {
+    width: 19%;
+    height: 230px;
+    border-radius: 10px;
+}
+
+.category>.item-category>.content-img {
+    width: 100%;
+    height: 180px;
+    position: relative;
+}
+
+.category>.item-category>.content-img>img {
+    position: absolute;
+    width: 95%;
+    height: 95%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.category>.item-category>span {
+    width: 90%;
+    text-align: center;
+    display: block;
+    font-weight: 600;
+    color: rgb(79, 79, 79);
+    font-size: 14px;
+}
+
+/* style body end */
+/* footer */
+#footer {
+    width: 100%;
+    margin-top: 50px;
+    height: auto;
+}
+
+footer {
+    width: 90%;
+    height: auto;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+footer>.ft-inf {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.p1 {
+    width: 25%;
+    align-items: flex-start;
+}
+
+.p1>b,
+p {
+    color: rgb(109, 107, 107);
+    margin: 0;
+}
+
+.p1>h1 {
+    color: rgb(43, 52, 49);
+}
+
+.contain-logo {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    margin-bottom: 10px;
+}
+
+.contain-logo>img {
+    margin: 0;
+    padding: 10px;
+    background-color: rgb(196, 255, 245);
+    border-radius: 10px;
+    width: 50px;
+    height: auto;
+}
+
+.contain-logo>h2 {
+    color: rgb(44, 50, 50);
+    font-weight: 500;
+}
+
+.border {
+    margin: 5px;
+    width: 1px;
+    height: 100px;
+    background-color: black;
+}
+
+.p2 {
+    margin: 0;
+    width: 10%;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+
+}
+
+.p2>b,
+a {
+    margin: 0;
+    text-decoration: none;
+    color: rgb(107, 103, 103);
+}
+
+.p2>b {
+    margin-bottom: 10px;
+}
+
+.p3 {
+    width: 20%;
+}
+
+.p3>b {
+    margin-bottom: 10px;
+    color: rgb(161, 161, 161);
+}
+
+.p3>.social {
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.p3>.social>a>i {
+    padding: 10px;
+    background-color: rgb(156, 197, 210);
+    border-radius: 20px;
+    color: white;
+}
+
+.p3>form {
+    width: 100%;
+    padding: 15px;
+}
+
+.p3>form>input[type='text'] {
+    padding: 10px;
+    border-radius: 10px;
+    border: solid 1px rgb(222, 222, 222);
+}
+
+.p3>form>input[type='button'] {
+    padding: 3px;
+    border: 0;
+    background-color: white;
+    color: rgb(135, 147, 157);
+}
+
+.p3>p {
+    color: rgb(188, 187, 187);
+}
+
+/* footer end */
+.conpany {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    background-color: rgb(247, 255, 254);
+    height: auto;
+}
+
+.conpany>.author {
+    width: 70%;
+}
+
+.conpany>.author>p {
+    width: 80%;
+    text-align: right;
+    border-right: solid 2px rgb(219, 219, 219);
+    padding: 5px;
+}
+
+.conpany>.applycation {
+    width: 30%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.conpany>.applycation>p {
+    width: 100px;
+    height: 30px;
+    margin-top: 10px;
+    background-color: rgb(25, 28, 31);
+    border-radius: 5px;
+    color: white;
+    line-height: 30px;
+}
+
+/* footer end */
+
+
+/* responesive */
+/* tablet */
+@media (max-width: 964px) and (min-width: 768px) {
+
+    /* respone-header */
+    #header>.l-header>.search {
+        display: none;
+    }
+
+    #header>.l-header {
+        width: 150px;
+    }
+
+    #header>.l-header>.search-tablet {
+        display: block;
+        position: relative;
+    }
+
+    #header>.l-header>.search-tablet>.search {
+        position: absolute;
+        left: -30px;
+        top: 40px;
+        z-index: 100;
+        width: 200px;
+    }
+
+    #header>.l-header>.search-tablet>.search>input {
+        padding: 10px;
+        border: solid 1px rgb(194, 194, 194);
+        border-radius: 10px;
+    }
+
+    /* respone-banner */
+    #banner>.big-banner>h1 {
+        width: 50%;
+    }
+
+    #banner>.big-banner>p {
+        width: 80%;
+    }
+
+    /* responsive main */
+    .contain>.slider {
+        width: 30%;
+    }
+
+    /* responesive category */
+    .category {
+        flex-wrap: wrap;
+    }
+
+    .category>.item-category {
+        width: 30%;
+    }
+
+    /* responesive footer */
+    footer {
+        flex-wrap: wrap;
+    }
+
+    footer>.ft-inf {
+        width: 80%;
+    }
+
+    .border {
+        width: 70%;
+        height: 1px;
+    }
+
+    .p2 {
+        margin: auto;
+        width: 25% !important;
+    }
+
+    .form-footer {
+        width: 90%;
+        display: flex;
+    }
+
+    .p3>form>input[type='button'] {
+        padding: 20px;
+        background-color: rgb(96, 127, 127);
+        border-radius: 10px;
+        color: white;
+    }
+    /* sub navigation(need click to show) */
+    .sub-nav{
+        flex-direction: column;
+        top: 90px;
+        left: 0;
+    }
+
+}
+@media (max-width: 725px) and (min-width: 426px) {
+    #header>.r-header{
+        width: 200px;
+    }
+    #header>.r-header>a{
+        display: none;
+    }
+    #header>.r-header>.coin{
+        display: none;
+    }
+    #banner>.big-banner>h1{
+        width: 80%;
+        left: 10px;
+    }
+    #banner>.big-banner>p{
+        width: 80%;
+    }
+    #banner>.big-banner>button{
+        top:83%;
+    }
+    #banner>.sm-banner>h2{
+        margin-top: 10px;
+        font-size: 15px;
+    }
+    #header>.l-header>.search{
+        display: flex;
+    }
+    .category{
+        flex-wrap: wrap;
+    }
+    .category>.item-category{
+        width: 30%;
+    }
+    .sub-nav{
+        width: 50%;
+        flex-direction: column;
+        top: 90px;
+        left: 0;
+    }
+}
+@media only screen and (max-width: 426px) {
+    .sub-nav{
+        width: 200px;
+        flex-direction: column;
+        top: 90px;
+        left: 0;
+    }
+    .category{
+        flex-wrap: wrap;
+
+    }
+    .category>.item-category{
+        width: 50%;
+    }
+    .contain>.slider{
+        width: 90%;
+    }
+    #banner>.sm-banner>button{
+        padding: 5px;
+        font-size: 13px;
+    }
+    #banner>.big-banner>p{
+        font-size: 12px;
+    }
+    #header>.r-header>.coin{
+        width: 40px;
+        font-size: 13px;
+    }
+    #header>.r-header>.user>#avata{
+        width: 30px;
+    }
+    #banner>.big-banner>h1{
+        width: 80%;
+        font-size: 16px;
+        left: 0;
+    }
+    #banner>.sm-banner>h2{
+        font-size: 14px;
+    }
+    #header>.r-header{
+        width: 200px;
+    }
+    #header>.r-header>a{
+        display: none;
+    }
+    #header>.l-header>.search{
+        display: none;
+    }
+    #header>.l-header{
+        width: 100px;
+    }
+    #header>.l-header>#logo{
+        width: 50px;
+        height: auto;
+    }
+    .cl-sub-nav, .cl-hide-s-nav{
+        font-size: 15px;
+    }
+    #banner>.big-banner>p{
+        width: 90%;
+        left: 0;
+    }
+    #banner>.big-banner>button{
+        top: 90%;
+    }
+    #banner>.sm-banner>img{
+        width: 50px;
+        height: 50px;
+    }
+    #banner>.sm-banner>p{
+        font-size: 10px;
+    }
+    footer{
+        flex-wrap: wrap;
+    }
+    footer>.ft-inf{
+        width: 90%;
+    }
+    .conpany>.author{
+        width: 50%;
+    }
+    .conpany>.applycation{
+        width: 40%;
+    }
+}
+   </style>
+    <!-- banner start -->
+    <section id="banner">
+        <div class="big-banner">
+            <img th:src="@{/vendors/images/ian-dooley-DJ7bWa-Gwks-unsplash.jpg} " id="img-banner" alt="">
+            <h1>Gieo ý tưởng, gặt hái thành công</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa aliquid illo, earum accusamus molestiae
+                fuga sapiente adipisci cumque tempore tempora beatae omnis, est illum enim alias optio repellendus,
+                excepturi sed!</p>
+            <button>Tìm hiểu thêm về chúng tôi</button>
+        </div>
+        <div class="sm-banner">
+            <img th:src="@{/vendors/images/coding.png} " alt="">
+            <h2>Bạn có muốn tăng tỉ lệ order</h2>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia debitis id incidunt voluptates odio
+                .
+            </p>
+            <button>Tìm hiểu ngay</button>
+        </div>
+    </section>
+    <!-- banner end -->
+    <!-- slider start -->
+    <section id="slider" class="swiper mySwiper">
+        <h3>Đề xuất gần đây</h3>
+        <div class="contain-slider swiper-wrapper">
+            <th:block th:each="job : ${job}">
+                <div class="slider swiper-slide">
+                    <div class="content-img">
+                        <i class="fa-solid fa-heart"></i>
+                        <img th:src="@{|/uploads/job/${job.context}|}" class="img-content" alt="">
+                    </div>
+                    <div class="content-inf">
+                        <img th:src="@{|/uploads/avata/${job.account.moreInfAccount.avata}|}" alt="">
+                        <div class="inf">
+                            <h5 th:text="${job.account.name}" ></h5>
+                            <p >Người mới</p>
+                            <b></b>
+                            <span th:text="${job.nameJob}">
+                        </span>
+                            <a th:href="@{|/moi-nguoi/chi-tiet/${job.idJob}|}">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+        <div class="swiper-button-next"><i class="fa-solid fa-angle-right"></i></div>
+        <div class="swiper-button-prev"><i class="fa-solid fa-angle-left"></i></div>
+        <div class="swiper-pagination"></div>
+    </section>
+    <!-- slider end -->
+
+    <!-- body start -->
+    <section id="main-contain">
+        <h3>Các job phù hợp với bạn</h3>
+        <div class="contain">
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3 style="margin-top: 50px">Danh mục sản phẩm</h3>
+        <div class="category">
+            <div class="item-category">
+                <div class="content-img">
+                    <img src="./img/banner.jpg" alt="">
+                </div>
+                <span>
+                    Thiết kế giao diện HTML-CSS
+                </span>
+            </div>
+            <div class="item-category">
+                <div class="content-img">
+                    <img src="./img/banner.jpg" alt="">
+                </div>
+                <span>
+                    Thiết kế giao diện HTML-CSS
+                </span>
+            </div>
+            <div class="item-category">
+                <div class="content-img">
+                    <img src="./img/banner.jpg" alt="">
+                </div>
+                <span>
+                    Thiết kế giao diện HTML-CSS
+                </span>
+            </div>
+            <div class="item-category">
+                <div class="content-img">
+                    <img src="./img/banner.jpg" alt="">
+                </div>
+                <span>
+                    Thiết kế giao diện HTML-CSS
+                </span>
+            </div>
+            <div class="item-category">
+                <div class="content-img">
+                    <img src="./img/banner.jpg" alt="">
+                </div>
+                <span>
+                    Thiết kế giao diện HTML-CSS
+                </span>
+            </div>
+            <div class="item-category">
+                <div class="content-img">
+                    <img src="./img/banner.jpg" alt="">
+                </div>
+                <span>
+                    Thiết kế giao diện HTML-CSS
+                </span>
+            </div>
+        </div>
+    </section>
+    <section id="main-contain">
+        <h3>Các job phù hợp với bạn</h3>
+        <div class="contain">
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3 style="margin-top: 50px">Danh mục sản phẩm</h3>
+        <div class="category">
+            <div class="item-category">
+                <div class="content-img">
+                    <img src="./img/banner.jpg" alt="">
+                </div>
+                <span>
+                    Thiết kế giao diện HTML-CSS
+                </span>
+            </div>
+            <div class="item-category">
+                <div class="content-img">
+                    <img src="./img/banner.jpg" alt="">
+                </div>
+                <span>
+                    Thiết kế giao diện HTML-CSS
+                </span>
+            </div>
+            <div class="item-category">
+                <div class="content-img">
+                    <img src="./img/banner.jpg" alt="">
+                </div>
+                <span>
+                    Thiết kế giao diện HTML-CSS
+                </span>
+            </div>
+            <div class="item-category">
+                <div class="content-img">
+                    <img src="./img/banner.jpg" alt="">
+                </div>
+                <span>
+                    Thiết kế giao diện HTML-CSS
+                </span>
+            </div>
+            <div class="item-category">
+                <div class="content-img">
+                    <img src="./img/banner.jpg" alt="">
+                </div>
+                <span>
+                    Thiết kế giao diện HTML-CSS
+                </span>
+            </div>
+            <div class="item-category">
+                <div class="content-img">
+                    <img src="./img/banner.jpg" alt="">
+                </div>
+                <span>
+                    Thiết kế giao diện HTML-CSS
+                </span>
+            </div>
+        </div>
+        <div class="contain">
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="item slider">
+                <div class="content-img">
+                    <i class="fa-solid fa-heart"></i>
+                    <img src="./img/banner.jpg" class="img-content" alt="">
+                </div>
+                <div class="content-inf">
+                    <img src="./img/banner.jpg" alt="">
+                    <div class="inf">
+                        <h5>300.000 đ </h5>
+                        <p>Người mới</p>
+                        <b>Chanh NCA</b>
+                        <span>
+                            Tôi sẽ giúp bạn làm banner, coder, design,..
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- body end -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 4,
+            spaceBetween: 10,
+            slidesPerGroup: 1,
+            loop: true,
+            centerSlide: 'true',
+            fade: 'true',
+            grabCursor: 'true',
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+                dynamicBullets: true
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                },
+                520: {
+                    slidesPerView: 3,
+                },
+                950: {
+                    slidesPerView: 4,
+                }
+
+            }
+        });
+    </script>
+
+</div>
+</html>

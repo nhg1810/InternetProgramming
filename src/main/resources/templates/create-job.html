@@ -7,24 +7,46 @@
     <div class="row">
       <div class="col-lg-10 col-12 mx-auto">
 <!--        form để thêm job-->
-        <form method="POST" th:action="@{/quan-ly-cong-viec/tao-cong-viec}" th:object="${job}">
           <!-- 2 column grid layout with text inputs for the first and last names -->
           <div class="row mb-4">
-            <div class="col">
-              <div class="form-outline">
-                <input type="text" id="form6Example1" th:field="*{nameJob}" class="form-control" />
-                <label class="form-label"  for="form6Example1">Tên công việc</label>
+            <form method="POST" enctype="multipart/form-data" th:action="@{/quan-ly-cong-viec/tao-cong-viec}" th:object="${job}">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="inputEmail4">Tên công việc</label>
+                  <input  th:field="*{nameJob}" type="text" class="form-control" id="inputEmail4" placeholder="Tôi sẽ code cho bạn HTML, Css,...">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputPassword4">Mô tả công việc</label>
+                  <input  th:field="*{detailJob.descripts}" type="text" class="form-control" id="inputPassword4" placeholder="Password">
+                </div>
               </div>
-            </div>
-            <div class="col">
-              <div class="form-outline">
-                <textarea class="form-control" id="form6Example7" th:field="*{context}" rows="4"></textarea>
-                <label class="form-label" for="form6Example7">Ghi chú</label>
+              <div class="form-group">
+                <img class="rounded-circle mt-5" width="300px"  id="img-avata"
+                     src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                <input type="file" name="image-job" accept="image/png, image/jpeg"
+                       onchange="document.getElementById('img-avata').src = window.URL.createObjectURL(this.files[0])"/>
               </div>
-            </div>
+              <div class="form-group">
+                <label for="inputAddress">Kiến thức đề cập</label>
+                <input th:field="*{detailJob.skillApply}" type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+              </div>
+              <div class="form-group">
+                <label for="inputAddress2">Tự đánh giá trình độ</label>
+                <input th:field="*{detailJob.level}" type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="inputCity">Đến từ công ty, team, đội ngũ, ...</label>
+                  <input th:field="*{detailJob.from}" type="text" class="form-control" id="inputCity">
+                </div>
+                <div class="form-group col-md-2">
+                  <label for="inputZip">Ngôn ngữ</label>
+                  <input th:field="*{detailJob.language}" type="text" class="form-control" id="inputZip">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Tạo công việc</button>
+            </form>
           </div>
-          <button type="submit" class="btn btn-primary btn-block mb-4">Tạo công việc</button>
-        </form>
 <!--kết thúc-->
       </div>
 </div>

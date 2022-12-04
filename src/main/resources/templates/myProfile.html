@@ -54,13 +54,19 @@ background-color:red;
             <div class="container rounded bg-white mt-5 mb-5 section-profile">
                 <div class="row">
                     <div class="col-md-3 border-right">
-                        <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img
-                                class="rounded-circle mt-5" width="150px"  id="img-avata"
-                                src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span
+                        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+
+                            <img th:if="${avata}" class="rounded-circle mt-5" width="150px"
+                                 id="img-avata" th:src="@{|/uploads/avata/${avata} |}">
+
+                            <img th:unless="${avata}" class="rounded-circle mt-5" width="150px"  id="img-avata1"
+                                src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+
+                            <span
                                 class="font-weight-bold" th:text="*{name}">Edogaru</span><span
                                 class="text-black-50" th:text="*{email}" ></span><span> </span>
 
-                            <input type="file" name="image-avata" th:field="*{moreInfAccount.avata}" accept="image/png, image/jpeg"
+                            <input type="file" name="image-avata" accept="image/png, image/jpeg"
                                    onchange="document.getElementById('img-avata').src = window.URL.createObjectURL(this.files[0])"/>
 
                         </div>
@@ -81,6 +87,8 @@ background-color:red;
                                     <input type="text" class="form-control" placeholder="0987654312" value="" th:field="*{moreInfAccount.phone}"></div>
                                 <div class="col-md-12"><label class="labels">Địa chỉ</label>
                                     <input type="text" class="form-control" placeholder="Đà nẵng..." value="" th:field="*{moreInfAccount.address}"></div>
+                                    <input type="hidden" th:field="*{email}" value="123@gmail.com"/>
+                                    <input type="hidden" th:field="*{passWord}" value="q2asdawxs"/>
                                 <div class="col-md-12"><label class="labels">Trạng thái tốt nghiệp</label>
                                     <input type="text" class="form-control" placeholder="Đã tốt nghiệp hoặc làm việc tại" value="" th:field="*{moreInfAccount.descriptGraduation}">
                                 </div>
@@ -101,7 +109,11 @@ background-color:red;
                             <div class="col-md-12"><label class="labels">Đã làm được ...</label>
                                 <input type="text" class="form-control" placeholder="kinh nghiệm..." value="" th:field="*{moreInfAccount.experience}"></div> <br>
                             <div class="col-md-12"><label class="labels">Ngày sinh</label>
-                                <input type="date" class="form-control" placeholder="11/11/2002" th:field="*{moreInfAccount.birth}" value=""></div>
+                                <input type="date" class="form-control" placeholder="11/11/2002" ></div>
+                            <div class="form-group purple-border">
+                                <label for="exampleFormControlTextarea4">Câu chuyện của tôi</label>
+                                <textarea th:field="*{moreInfAccount.myBlog}" class="form-control" id="exampleFormControlTextarea4" rows="3"></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>

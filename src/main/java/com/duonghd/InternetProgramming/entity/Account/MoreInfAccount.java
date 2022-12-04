@@ -13,37 +13,28 @@ import java.util.Date;
 @Entity
 @Table(name="moreAccount")
 @NoArgsConstructor
+@AllArgsConstructor
 public class MoreInfAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idMAcount;
     private String phone;
     private Date birth;
-    @NotEmpty(message = "{NotEmpty.address}")
+//    @NotEmpty(message = "{NotEmpty.address}")
     private String address;
-    @NotEmpty(message = "{NotEmpty.descriptGraduation}")
+//    @NotEmpty(message = "{NotEmpty.descriptGraduation}")
     private String descriptGraduation;
 
     private String avata;
-    @NotEmpty(message = "{NotEmpty.link}")
+//    @NotEmpty(message = "{NotEmpty.link}")
     private String link;
 
-    @NotEmpty(message = "{NotEmpty.experience}")
+//    @NotEmpty(message = "{NotEmpty.experience}")
     private String experience;
 
     private String context;
 
-    public MoreInfAccount(String phone, Date birth, String address, String descriptGraduation, String avata, String link, String experience, String context, Account account) {
-        this.phone = phone;
-        this.birth = birth;
-        this.address = address;
-        this.descriptGraduation = descriptGraduation;
-        this.avata = avata;
-        this.link = link;
-        this.experience = experience;
-        this.context = context;
-        this.account = account;
-    }
+    private String myBlog;
 
     @OneToOne
     @JoinColumn(name = "fk_account")

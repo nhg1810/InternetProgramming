@@ -6,7 +6,7 @@
   <section class="section-padding">
     <a th:href="@{/quan-ly-cong-viec/tao-cong-viec}" class="btn btn-secondary btn-rounded">Tạo một công việc</a>
 
-    <a th:href="@{/quan-ly-cong-viec/tao-cong-viec}" class="btn btn-secondary btn-rounded">Quản lý một phòng họp</a>
+    <a th:href="@{/quan-ly-phong-hop}" class="btn btn-secondary btn-rounded">Quản lý một phòng họp</a>
 
     <div class="row">
 
@@ -17,7 +17,7 @@
               <div class="row g-0">
                 <div class="col-md-4">
                   <img
-                          src="https://mdbcdn.b-cdn.net/wp-content/uploads/2020/06/vertical.webp"
+                          th:src="@{|/uploads/job/${job.context}|}"
                           alt="Trendy Pants and Shoes"
                           class="img-fluid rounded-start"
                   />
@@ -25,12 +25,14 @@
                 <div class="col-md-8">
                   <div class="card-body">
                     <h5 class="card-title" th:text="${job.nameJob}">Card title</h5>
-                    <p class="card-text" th:text="${job.context}">
+                    <p class="card-text" th:text="${job.detailJob.descripts}">
                       This is a wider card with supporting text below as a natural lead-in to
                       additional content. This content is a little bit longer.
                     </p>
+<!--                    xem các thành viên và duyệt-->
+                      <a th:href="@{|/quan-ly-phong-hop/chi-tiet-cong-viec/${job.idJob}|}">Xem chi tiết</a>
                     <p class="card-text">
-                      <small class="text-muted">Last updated 3 mins ago</small>
+                      <small th:text="${job.detailJob.date}" class="text-muted"></small>
                     </p>
                   </div>
                 </div>

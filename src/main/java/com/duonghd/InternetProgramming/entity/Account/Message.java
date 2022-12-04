@@ -13,6 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Message {
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
     private long idMessage;
     private String context;

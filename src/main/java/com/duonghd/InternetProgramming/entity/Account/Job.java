@@ -1,11 +1,13 @@
 package com.duonghd.InternetProgramming.entity.Account;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,7 +31,10 @@ public class Job {
     @JoinColumn(name = "idHost")
     private Account account;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "idMember")
-    private Member member;
+    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
+    private List<Member> members;
+
+
+    @OneToOne(mappedBy = "job", cascade = CascadeType.ALL, orphanRemoval = true)
+    private DetailJob detailJob;
 }

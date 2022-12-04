@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/l_main}">
+<div layout:fragment="layout_main">
+  <section class="section-padding" style="margin-left: 20px">
+
+    <div class="row">
+    <th:block th:each="myTutorial : ${myTutorial}">
+      <div class="card" style="width: 18rem;">
+        <img th:src="@{|/uploads/job/${myTutorial.job.context} |}" class="card-img-top" alt="Chicago Skyscrapers"/>
+        <div class="card-body">
+          <h5 class="card-title" th:text="${myTutorial.job.nameJob}">Card title</h5>
+          <p class="card-text" th:text="${myTutorial.job.detailJob.descripts}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <ul class="list-group list-group-light list-group-small">
+          <li class="list-group-item px-4">Cras justo odio</li>
+          <li class="list-group-item px-4">Dapibus ac facilisis in</li>
+          <li class="list-group-item px-4">Vestibulum at eros</li>
+        </ul>
+        <div class="card-body">
+          <a th:if="${myTutorial.status eq 1}" href="#" class="card-link">Chưa được duyệt</a>
+          <a th:if="${myTutorial.status eq 2}" th:href="@{|/quan-ly-phong-hop/${myTutorial.job.room.idRoom}|}" class="card-link">Truy cập</a>
+        </div>
+      </div>
+    </th:block>
+  </div>
+</div>
+
+</section>
+
+</html>

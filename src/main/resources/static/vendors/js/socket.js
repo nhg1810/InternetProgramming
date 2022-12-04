@@ -4,13 +4,13 @@ const url = 'http://localhost:8080';
 let stompClient;
 let selectedRoom;
 let newMessages = new Map();
-var idRoomChat = 0;
- layout_chat = document.getElementById("layout-chat")
-layout_chat.style.display = "none";
+var idRoomChat = getCookie("idRoom");
+var html_append_message ="";
+if(idRoomChat != ""){
+    connectToChat(idRoomChat)
+}
 
- layout_page_null = document.getElementById("page-null")
-layout_page_null.style.display = "block";
-function connectToChat(roomID) {
+function connectToChat(idRoomChat) {
 	//tạo một kết nối tới socket
     console.log("connecting to chat...")
     let socket = new SockJS(url + '/chat');
@@ -19,12 +19,31 @@ function connectToChat(roomID) {
         console.log("connected to: " + frame);
 
 		//subcribe 1 topic với tên là userName
-        stompClient.subscribe("/topic/messages/" + roomID, function (response) {
+        stompClient.subscribe("/topic/messages/" + idRoomChat, function (response) {
 //        response trả về là một cấu trúc của message sẽ được móc ra  tu db
             let data = JSON.parse(response.body);
             console.log("data", data)
             //sử dụng response để làm j đó ở dưới đây..
-
+            if(data.fromLogin != getCookie("idUser")){
+            console.log(data.fromLogin+ "khac"+ idRoomChat)
+               html_append_message = '<li class="clearfix">'+
+                            '<div class="message-data text-left">'+
+                              '<span class="message-data-time">10:10 AM, Today</span>'+
+                              '<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">'+
+                            '</div>'+
+                            '<div  class="message other-message float-left">'+ data.message+ '</div>'+
+                          '</li>';
+            }else{
+              html_append_message = '<li class="clearfix">'+
+                            '<div class="message-data text-right">'+
+                              '<span class="message-data-time">10:10 AM, Today</span>'+
+                              '<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">'+
+                            '</div>'+
+                            '<div   style="background: #2e7f91; color: white" class="message other-message float-right" class="message other-message float-right">'+ data.message+ '</div>'+
+                          '</li>';
+            }
+            document.getElementById("chat-history").innerHTML += html_append_message
+            html_append_message = "";
         });
     });
 }
@@ -53,47 +72,34 @@ function sendMsg() {
     if (message == '') {
         alert("chua điền thong tin");
     }else{
-            stompClient.send("/app/chat/" + roomID, {}, JSON.stringify({
-                fromLogin:  idUserSend,
-                message: message
-            }));
-            let html = '<li class="clearfix">'+
-                '<div class="message-data text-right">'+
-                  '<span class="message-data-time">10:10 AM, Today</span>'+
-                  '<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">'+
-                '</div>'+
-                '<div class="message other-message float-right">'+ message+ '</div>'+
-              '</li>';
-
-            document.getElementById("chat-history").innerHTML += html
-        //    lưu 3 trường này vào db qua 1 api...
-//        postData('/chat/'+idRoomChat+'', {
-//                idUserSend:  idUserSend,
-//                message: message })
-//          .then((data) => {
-//            console.log("save inf into db: " + data);
-//          });
+        stompClient.send("/app/chat/" + roomID, {}, JSON.stringify({
+            fromLogin:  idUserSend,
+            message: message
+        }));
+        $('#value-message').val("")
     }
 }
 
-//chọn một roomID để thực hiện chat, lấy id của room đó và show ra tất cả tin nhắn của room đó
-function selectUser(idRoom, nameRoom) {
-    document.addEventListener('click', function handleClick(event) {
-       layout_chat.style.display = "block";
-       layout_page_null.style.display = "none";
-        document.getElementById("name-chat").innerHTML = nameRoom;
-       idRoomChat = idRoom;
-
-       //gọi ajax để get tất cả các tin nhắn theo id phòng
-           $.get("/dashboard-chat/message/"+idRoom+"", function(data, status){
-             console.log(data);
-           });
-    });
-//console.log(idRoom);
-//hàm này đc gắn sự kiện click bên trang html
-//nếu được làm check xem coi một user muốn vào idroom thì đc host cấp quyền hay chưa
-//gọi hàm connectToChat tới idRoom đấy
-    connectToChat(idRoom)
-//lấy ra value idRoom của một room chat, và làm .., gì đó
+////chọn một roomID để thực hiện chat, lấy id của room đó và show ra tất cả tin nhắn của room đó
+//function selectRoomSK(idRoom) {
+//    document.addEventListener('click', function handleClick(event) {
+//       idRoomChat = idRoom;
+//    });
+//    connectToChat(idRoom)
+//}
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }
 

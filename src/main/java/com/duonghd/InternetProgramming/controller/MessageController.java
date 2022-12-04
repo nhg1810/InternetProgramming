@@ -9,6 +9,7 @@ import com.duonghd.InternetProgramming.responsitories.MessageReponsitory;
 import com.duonghd.InternetProgramming.responsitories.RoomReponsitory;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
+@RequestMapping(path = "/api/v1")
 @RestController("/dashboard-chat")
 public class MessageController {
     private AccountResponeitory accountResponeitory;
@@ -51,13 +53,16 @@ public class MessageController {
         messageStore.setTimeSending(date);
         messageReponsitory.save(messageStore);
     }
-
-//    public ResponseEntity<Room> showMessage(@PathVariable String idRoom){
-//        Room room = roomReponsitory.getOne(idRoom);
-//        if (room == null) {
-//            return ResponseEntity.notFound().build();
-//        } else {
-//            return ResponseEntity.ok(room);
-//        }
-//    }
+    @MessageMapping("/rtc-room/{tokenRoom}/{idRoom}")
+    public void sendTokenRoom(@DestinationVariable String tokenRoom, @DestinationVariable String idRoom) {
+        Room room = new Room();
+        room.setIdRoom(idRoom);
+        room.setTokenRoom(tokenRoom);
+        roomReponsitory.save(room);
+    }
+    @GetMapping("/messages")
+   public List<Room> getRoom(){
+        List<Room> rooms =  roomReponsitory.findAll();
+        return rooms;
+    }
 }
