@@ -11,4 +11,6 @@ public interface JobReponsitory extends JpaRepository<Job, Long> {
     List<Job> findByAccount(Account account);
     Job findByRoom(Room room);
     Job findByIdJobAndAccount(long idJob, Account account);
+
+    List<Job> findByNameJobContainingIgnoreCase(String nameJob);
 }

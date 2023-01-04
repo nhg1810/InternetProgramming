@@ -47,7 +47,6 @@ public class RoomController {
     public String message(@PathVariable String idRoom ,
                           @CookieValue(name="idUser",defaultValue ="0") Long cookies,
                           HttpServletResponse response,
-
                           Model model)throws NoSuchAlgorithmException {
         if(cookies == 0L){
             return "redirect:/trang-chu/dang-nhap";

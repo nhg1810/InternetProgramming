@@ -28,7 +28,13 @@ public class AllJobController {
     @GetMapping("")
     public String index(Model model){
         List<Job> job = jobReponsitory.findAll();
+        List<Job> job_web =  jobReponsitory.findByNameJobContainingIgnoreCase("web");
+        List<Job> job_girl =  jobReponsitory.findByNameJobContainingIgnoreCase("g");
         model.addAttribute("job", job);
+        model.addAttribute("job_web", job_web);
+        model.addAttribute("job_girl", job_girl);
+
+
         return "social";
     }
     @GetMapping("/chi-tiet/{idJob}")
